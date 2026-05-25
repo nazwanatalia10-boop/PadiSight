@@ -316,13 +316,13 @@ elif menu == "🌾 Prediksi Produktivitas":
 
         c1, c2 = st.columns(2)
         with c1:
-            gwetroot    = st.number_input("GWETROOT (Kel. Tanah)", min_value=0.0, max_value=1.0, value=0.85, step=0.001, format="%.3f")
-            rh2m        = st.number_input("RH2M (Kel. Udara %)", min_value=0.0, max_value=100.0, value=85.0, step=0.01)
+            gwetroot    = st.number_input("Kelembaban Tanah (GWETROOT)", min_value=0.0, max_value=1.0, value=0.85, step=0.001, format="%.3f")
+            rh2m        = st.number_input("Kelembaban Udara / RH2M (%)", min_value=0.0, max_value=100.0, value=85.0, step=0.01)
         with c2:
-            prectotcorr = st.number_input("PRECTOTCORR (mm/hari)", min_value=0.0, value=7.5, step=0.001, format="%.3f")
-            t2m         = st.number_input("T2M (Suhu °C)", value=26.0, step=0.01)
-
-        ws2m = st.number_input("WS2M (Angin m/s)", min_value=0.0, value=1.4, step=0.01)
+            prectotcorr = st.number_input("Curah Hujan / PRECTOTCORR (mm/hari)", min_value=0.0, value=7.5, step=0.001, format="%.3f")
+            t2m         = st.number_input("Suhu Udara / T2M (°C)", value=26.0, step=0.01)
+        
+        ws2m = st.number_input("Kecepatan Angin / WS2M (m/s)", min_value=0.0, value=1.4, step=0.01)
 
         st.markdown("---")
         st.markdown("**Opsional — Hitung Produksi Total**")
