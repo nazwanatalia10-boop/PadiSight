@@ -369,14 +369,12 @@ elif menu == "🌾 Prediksi Produktivitas":
                         <div style="font-size:0.7rem; color:#4a6355">{sp_str} dari historis</div>
                     </div>
                 </div>"""
-            else: 
-                # INI ADALAH ELSE yang menutup "if prediksi_btn:"
-                st.markdown("""
-                <div style='text-align:center; padding:60px 20px; color:#4a6355'>
-                    <div style='font-size:3rem; margin-bottom:12px'>🌾</div>
-                    <p>Isi form di kiri dan klik<br><strong>"Prediksi Sekarang"</strong></p>
-                </div>
-                """, unsafe_allow_html=True)
+            st.markdown("""
+            <div style='text-align:center; padding:60px 20px; color:#4a6355'>
+                <div style='font-size:3rem; margin-bottom:12px'>🌾</div>
+                <p>Isi form di kiri dan klik<br><strong>"Prediksi Sekarang"</strong></p>
+            </div>
+            """, unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════════════════
 # PERAMALAN
