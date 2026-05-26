@@ -33,6 +33,16 @@ st.markdown("""
   }
   [data-testid="stSidebar"] * { color: white !important; }
   [data-testid="stSidebar"] .stRadio label { color: rgba(255,255,255,0.7) !important; }
+  [data-testid="stSidebar"] .stRadio label div p {
+    background: rgba(255,255,255,0.08);
+    border-radius: 100px;
+    padding: 8px 16px;
+    transition: all 0.2s;
+}
+[data-testid="stSidebar"] .stRadio label:has(input:checked) div p {
+    background: #1a6b3c !important;
+    color: white !important;
+}
   [data-testid="stSidebar"] .stRadio label:hover { color: white !important; }
 
   /* Metric cards */
@@ -203,9 +213,9 @@ def rekomendasi(status_dict, kategori):
 
 # ── SIDEBAR ───────────────────────────────────────────────
 with st.sidebar:
+    st.image("WhatsApp Image 2026-05-26 at 08.18.23.jpeg", use_column_width=True)
     st.markdown("""
-        <div style='text-align:center; padding: 20px 0 10px'>
-            <span style='font-size:2rem'>🌾</span>
+        <div style='text-align:center; padding: 10px 0'>
             <h2 style='color:white; margin:8px 0 4px; font-size:1.5rem'>PadiSight</h2>
             <p style='color:rgba(255,255,255,0.5); font-size:0.8rem'>Sistem Prediksi Produktivitas Padi</p>
         </div>
@@ -303,8 +313,7 @@ elif menu == "🌾 Prediksi Produktivitas":
     col_form, col_hasil = st.columns([1, 1.2], gap="large")
 
     with col_form:
-        st.markdown("<div class='padisight-card'>", unsafe_allow_html=True)
-        st.markdown("**📥 Input Data Iklim**")
+        st.markdown("<h3 style='font-size:1rem; font-weight:700; color:#0f1c14; margin-bottom:16px'>📥 Input Data Iklim</h3>", unsafe_allow_html=True)
 
         provinsi_list = sorted(list(le.classes_))
         provinsi_display = [p.capitalize() for p in provinsi_list]
@@ -329,7 +338,6 @@ elif menu == "🌾 Prediksi Produktivitas":
         luas_panen = st.number_input("Luas Panen (ha)", min_value=0.0, value=0.0, step=1000.0)
 
         prediksi_btn = st.button("🌾 Prediksi Sekarang")
-        st.markdown("</div>", unsafe_allow_html=True)
 
     with col_hasil:
         if prediksi_btn:
@@ -416,12 +424,11 @@ elif menu == "🌾 Prediksi Produktivitas":
                     {status_rows}
                 </div>
                 """, unsafe_allow_html=True)
-
             # ── Rekomendasi ──
             rekom_rows = ""
             for icon, judul, detail in rekoms:
                 rekom_rows += f"""
-                <div class='rekom-item'>
+                <div style='background:rgba(26,107,60,0.04); border-left:3px solid #5ac98a; border-radius:8px; padding:12px 14px; margin-bottom:8px'>
                     <span style='font-size:1.2rem'>{icon}</span>
                     <strong style='font-size:0.85rem; color:#0f1c14'> {judul}</strong>
                     <p style='font-size:0.8rem; color:#4a6355; margin:4px 0 0; line-height:1.5'>{detail}</p>
