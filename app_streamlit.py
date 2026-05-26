@@ -357,28 +357,26 @@ elif menu == "🌾 Prediksi Produktivitas":
 
             # ── Rekomendasi ──
             rekom_rows = ""
-            for icon, judul, detail in rekoms:
-                rekom_rows += f"""
-                <div style='background:rgba(26,107,60,0.04); border-left:3px solid #5ac98a; border-radius:8px; padding:12px 14px; margin-bottom:8px'>
-                    <span style='font-size:1.1rem'>{icon}</span>
-                    <strong style='font-size:0.85rem; color:#0f1c14'> {judul}</strong>
-                    <p style='font-size:0.8rem; color:#4a6355; margin:4px 0 0; line-height:1.5'>{detail}</p>
+            status_rows = ""
+            for f, v in status.items():
+                sp_str = f"+{v['selisih_pct']}%" if v['selisih_pct'] >= 0 else f"{v['selisih_pct']}%"
+                status_rows += f"""
+                <div style="display:flex; align-items:center; gap:10px; padding:7px 10px; background:#f5f0e8; border-radius:8px; margin-bottom:6px">
+                    <div style="width:8px; height:8px; border-radius:50%; background:{v['warna']}; flex-shrink:0"></div>
+                    <div style="flex:1; font-size:0.8rem; color:#4a6355">{LABEL_IKLIM[f]}</div>
+                    <div>
+                        <div style="font-size:0.75rem; font-weight:600; color:{v['warna']}">{v['label']}</div>
+                        <div style="font-size:0.7rem; color:#4a6355">{sp_str} dari historis</div>
+                    </div>
                 </div>"""
-            st.markdown(f"""
-            <div class='padisight-card'>
-                <div style='font-size:0.9rem; font-weight:700; color:#0f1c14; margin-bottom:14px'>💡 Rekomendasi Tindakan</div>
-                {rekom_rows}
-            </div>
-            """, unsafe_allow_html=True)
-
-        else: 
-            # INI ADALAH ELSE yang menutup "if prediksi_btn:"
-            st.markdown("""
-            <div style='text-align:center; padding:60px 20px; color:#4a6355'>
-                <div style='font-size:3rem; margin-bottom:12px'>🌾</div>
-                <p>Isi form di kiri dan klik<br><strong>"Prediksi Sekarang"</strong></p>
-            </div>
-            """, unsafe_allow_html=True)
+            else: 
+                # INI ADALAH ELSE yang menutup "if prediksi_btn:"
+                st.markdown("""
+                <div style='text-align:center; padding:60px 20px; color:#4a6355'>
+                    <div style='font-size:3rem; margin-bottom:12px'>🌾</div>
+                    <p>Isi form di kiri dan klik<br><strong>"Prediksi Sekarang"</strong></p>
+                </div>
+                """, unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════════════════
 # PERAMALAN
