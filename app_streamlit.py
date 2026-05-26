@@ -316,13 +316,13 @@ elif menu == "🌾 Prediksi Produktivitas":
 
         c1, c2 = st.columns(2)
         with c1:
-            gwetroot    = st.number_input("Kelembaban Tanah (GWETROOT)", min_value=0.0, max_value=1.0, value=0.85, step=0.001, format="%.3f")
-            rh2m        = st.number_input("Kelembaban Udara / RH2M (%)", min_value=0.0, max_value=100.0, value=85.0, step=0.01)
+            gwetroot    = st.number_input("GWETROOT (Kel. Tanah)", min_value=0.0, max_value=1.0, value=0.85, step=0.001, format="%.3f")
+            rh2m        = st.number_input("RH2M (Kel. Udara %)", min_value=0.0, max_value=100.0, value=85.0, step=0.01)
         with c2:
-            prectotcorr = st.number_input("Curah Hujan / PRECTOTCORR (mm/hari)", min_value=0.0, value=7.5, step=0.001, format="%.3f")
-            t2m         = st.number_input("Suhu Udara / T2M (°C)", value=26.0, step=0.01)
-        
-        ws2m = st.number_input("Kecepatan Angin / WS2M (m/s)", min_value=0.0, value=1.4, step=0.01)
+            prectotcorr = st.number_input("PRECTOTCORR (mm/hari)", min_value=0.0, value=7.5, step=0.001, format="%.3f")
+            t2m         = st.number_input("T2M (Suhu °C)", value=26.0, step=0.01)
+
+        ws2m = st.number_input("WS2M (Angin m/s)", min_value=0.0, value=1.4, step=0.01)
 
         st.markdown("---")
         st.markdown("**Opsional — Hitung Produksi Total**")
@@ -376,32 +376,32 @@ elif menu == "🌾 Prediksi Produktivitas":
 
             # ── Perbandingan + Status Iklim ──
             c1, c2 = st.columns(2)
+
             with c1:
-                st.markdown("<div class='padisight-card'>", unsafe_allow_html=True)
-                st.markdown("**📊 Perbandingan Historis**")
                 if avg_prov.get('Produktivitas'):
                     selisih     = produktivitas - avg_prov['Produktivitas']
                     selisih_pct = (selisih / avg_prov['Produktivitas']) * 100
                     arah        = "↑" if selisih >= 0 else "↓"
                     warna_arah  = "#2d9e5f" if selisih >= 0 else "#e74c3c"
                     st.markdown(f"""
-                    <table style='width:100%; font-size:0.82rem; border-collapse:collapse'>
-                        <tr><td style='color:#4a6355; padding:6px 0; border-bottom:1px solid rgba(26,107,60,0.06)'>Prediksi saat ini</td><td style='text-align:right; font-weight:600; border-bottom:1px solid rgba(26,107,60,0.06)'>{produktivitas:.2f} kw/ha</td></tr>
-                        <tr><td style='color:#4a6355; padding:6px 0; border-bottom:1px solid rgba(26,107,60,0.06)'>Rata-rata historis provinsi</td><td style='text-align:right; font-weight:600; border-bottom:1px solid rgba(26,107,60,0.06)'>{avg_prov['Produktivitas']:.2f} kw/ha</td></tr>
-                        <tr><td style='color:#4a6355; padding:6px 0; border-bottom:1px solid rgba(26,107,60,0.06)'>Rata-rata nasional</td><td style='text-align:right; font-weight:600; border-bottom:1px solid rgba(26,107,60,0.06)'>{avg_nasional:.2f} kw/ha</td></tr>
-                        <tr><td style='color:#4a6355; padding:6px 0'>Selisih dari historis</td><td style='text-align:right; font-weight:600; color:{warna_arah}'>{arah} {abs(selisih):.2f} kw/ha ({abs(selisih_pct):.1f}%)</td></tr>
-                    </table>
+                    <div class='padisight-card'>
+                        <div style='font-size:0.9rem; font-weight:700; color:#0f1c14; margin-bottom:14px'>📊 Perbandingan Historis</div>
+                        <table style='width:100%; font-size:0.82rem; border-collapse:collapse'>
+                            <tr><td style='color:#4a6355; padding:7px 0; border-bottom:1px solid rgba(26,107,60,0.06)'>Prediksi saat ini</td><td style='text-align:right; font-weight:600; border-bottom:1px solid rgba(26,107,60,0.06)'>{produktivitas:.2f} kw/ha</td></tr>
+                            <tr><td style='color:#4a6355; padding:7px 0; border-bottom:1px solid rgba(26,107,60,0.06)'>Rata-rata historis provinsi</td><td style='text-align:right; font-weight:600; border-bottom:1px solid rgba(26,107,60,0.06)'>{avg_prov['Produktivitas']:.2f} kw/ha</td></tr>
+                            <tr><td style='color:#4a6355; padding:7px 0; border-bottom:1px solid rgba(26,107,60,0.06)'>Rata-rata nasional</td><td style='text-align:right; font-weight:600; border-bottom:1px solid rgba(26,107,60,0.06)'>{avg_nasional:.2f} kw/ha</td></tr>
+                            <tr><td style='color:#4a6355; padding:7px 0'>Selisih dari historis</td><td style='text-align:right; font-weight:600; color:{warna_arah}'>{arah} {abs(selisih):.2f} kw/ha ({abs(selisih_pct):.1f}%)</td></tr>
+                        </table>
+                    </div>
                     """, unsafe_allow_html=True)
                 else:
-                    st.caption("Data historis belum tersedia.")
-                st.markdown("</div>", unsafe_allow_html=True)
+                    st.markdown("<div class='padisight-card'><div style='font-size:0.9rem; font-weight:700; color:#0f1c14; margin-bottom:10px'>📊 Perbandingan Historis</div><p style='font-size:0.82rem; color:#4a6355'>Data historis belum tersedia.</p></div>", unsafe_allow_html=True)
 
             with c2:
-                st.markdown("<div class='padisight-card'>", unsafe_allow_html=True)
-                st.markdown("**🌡️ Status Kondisi Iklim**")
+                status_rows = ""
                 for f, v in status.items():
                     selisih_str = f"+{v['selisih_pct']}%" if v['selisih_pct'] >= 0 else f"{v['selisih_pct']}%"
-                    st.markdown(f"""
+                    status_rows += f"""
                     <div style='display:flex; align-items:center; gap:10px; padding:7px 10px; background:#f5f0e8; border-radius:8px; margin-bottom:6px'>
                         <div style='width:8px; height:8px; border-radius:50%; background:{v["warna"]}; flex-shrink:0'></div>
                         <div style='flex:1; font-size:0.8rem; color:#4a6355'>{LABEL_IKLIM[f]}</div>
@@ -409,22 +409,29 @@ elif menu == "🌾 Prediksi Produktivitas":
                             <div style='font-size:0.75rem; font-weight:600; color:{v["warna"]}'>{v["label"]}</div>
                             <div style='font-size:0.7rem; color:#4a6355'>{selisih_str} dari historis</div>
                         </div>
-                    </div>
-                    """, unsafe_allow_html=True)
-                st.markdown("</div>", unsafe_allow_html=True)
+                    </div>"""
+                st.markdown(f"""
+                <div class='padisight-card'>
+                    <div style='font-size:0.9rem; font-weight:700; color:#0f1c14; margin-bottom:14px'>🌡️ Status Kondisi Iklim</div>
+                    {status_rows}
+                </div>
+                """, unsafe_allow_html=True)
 
             # ── Rekomendasi ──
-            st.markdown("<div class='padisight-card'>", unsafe_allow_html=True)
-            st.markdown("**💡 Rekomendasi Tindakan**")
+            rekom_rows = ""
             for icon, judul, detail in rekoms:
-                st.markdown(f"""
+                rekom_rows += f"""
                 <div class='rekom-item'>
                     <span style='font-size:1.2rem'>{icon}</span>
                     <strong style='font-size:0.85rem; color:#0f1c14'> {judul}</strong>
                     <p style='font-size:0.8rem; color:#4a6355; margin:4px 0 0; line-height:1.5'>{detail}</p>
-                </div>
-                """, unsafe_allow_html=True)
-            st.markdown("</div>", unsafe_allow_html=True)
+                </div>"""
+            st.markdown(f"""
+            <div class='padisight-card'>
+                <div style='font-size:0.9rem; font-weight:700; color:#0f1c14; margin-bottom:14px'>💡 Rekomendasi Tindakan</div>
+                {rekom_rows}
+            </div>
+            """, unsafe_allow_html=True)
 
         else:
             st.markdown("""
