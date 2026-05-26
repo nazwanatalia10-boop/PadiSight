@@ -356,22 +356,21 @@ elif menu == "🌾 Prediksi Produktivitas":
                 </div>
                 """, unsafe_allow_html=True)
 
-# ── Rekomendasi ──
-st.markdown("<div class='padisight-card'>", unsafe_allow_html=True)
-st.markdown("<div style='font-size:0.9rem; font-weight:700; color:#0f1c14; margin-bottom:14px'>💡 Rekomendasi Tindakan</div>", unsafe_allow_html=True)
-
-for icon, judul, detail in rekoms:
-    # Menggunakan f-string dengan template yang bersih
-    html_content = f"""
-    <div style='background:rgba(26,107,60,0.04); border-left:3px solid #5ac98a; border-radius:8px; padding:12px 14px; margin-bottom:8px'>
-        <span style='font-size:1.1rem'>{icon}</span>
-        <strong style='font-size:0.85rem; color:#0f1c14'> {judul}</strong>
-        <p style='font-size:0.8rem; color:#4a6355; margin:4px 0 0; line-height:1.5'>{detail}</p>
-    </div>
-    """
-    st.markdown(html_content, unsafe_allow_html=True)
-
-st.markdown("</div>", unsafe_allow_html=True)
+            st.markdown("<div class='padisight-card'>", unsafe_allow_html=True)
+            st.markdown("<div style='font-size:0.9rem; font-weight:700; color:#0f1c14; margin-bottom:14px'>💡 Rekomendasi Tindakan</div>", unsafe_allow_html=True)
+            
+            for icon, judul, detail in rekoms:
+                # Menggunakan f-string dengan template yang bersih
+                html_content = f"""
+                <div style='background:rgba(26,107,60,0.04); border-left:3px solid #5ac98a; border-radius:8px; padding:12px 14px; margin-bottom:8px'>
+                    <span style='font-size:1.1rem'>{icon}</span>
+                    <strong style='font-size:0.85rem; color:#0f1c14'> {judul}</strong>
+                    <p style='font-size:0.8rem; color:#4a6355; margin:4px 0 0; line-height:1.5'>{detail}</p>
+                </div>
+                """
+                st.markdown(html_content, unsafe_allow_html=True)
+            
+            st.markdown("</div>", unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════════════════
 # PERAMALAN
