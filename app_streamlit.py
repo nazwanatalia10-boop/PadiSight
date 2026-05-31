@@ -208,26 +208,16 @@ def rekomendasi(status_dict):
 
 # ── SIDEBAR ───────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("""
-        <div style='text-align:center; padding:16px 0 8px'>
-            <h2 style='color:white; margin:4px 0; font-size:1.4rem'>PadiSight</h2>
-            <p style='color:rgba(255,255,255,0.5); font-size:0.75rem; margin:0'>Sistem Prediksi Produktivitas Padi</p>
-        </div>
-        <hr style='border-color:rgba(255,255,255,0.1); margin:8px 0 12px'>
-    """, unsafe_allow_html=True)
-
     menu = st.radio(
         "Navigasi",
         ["🏠 Beranda", "🌾 Prediksi Produktivitas", "📈 Peramalan Tren"],
         label_visibility="collapsed"
     )
-
     st.markdown("""
-        <hr style='border-color:rgba(255,255,255,0.1); margin:12px 0'>
-        <div style='color:rgba(255,255,255,0.4); font-size:0.72rem; text-align:center'>
-            Data: NASA POWER · BPS<br>
-            Model: XGBoost · Prophet<br>
-            2013 – 2025
+        <hr style='border-color:rgba(255,255,255,0.1); margin:16px 0 8px'>
+        <div style='text-align:center'>
+            <h2 style='color:white; margin:4px 0; font-size:1.3rem'>PadiSight</h2>
+            <p style='color:rgba(255,255,255,0.45); font-size:0.72rem; margin:0'>Sistem Prediksi Produktivitas Padi</p>
         </div>
     """, unsafe_allow_html=True)
 
@@ -396,20 +386,16 @@ elif menu == "🌾 Prediksi Produktivitas":
                 </div>
                 """, unsafe_allow_html=True)
 
-            rekom_rows = ""
+            st.markdown("<div class='padisight-card'><div style='font-size:0.88rem; font-weight:700; color:#0f1c14; margin-bottom:10px'>Rekomendasi Tindakan</div>", unsafe_allow_html=True)
             for icon, judul, detail in rekoms:
-                rekom_rows += f"""
-                <div style='background:rgba(26,107,60,0.04); border-left:3px solid #5ac98a; border-radius:8px; padding:10px 12px; margin-bottom:7px'>
-                    <span style='font-size:1rem'>{icon}</span>
-                    <strong style='font-size:0.82rem; color:#0f1c14'> {judul}</strong>
-                    <p style='font-size:0.78rem; color:#4a6355; margin:3px 0 0; line-height:1.5'>{detail}</p>
-                </div>"""
-            st.markdown(f"""
-            <div class='padisight-card'>
-                <div style='font-size:0.88rem; font-weight:700; color:#0f1c14; margin-bottom:12px'>💡 Rekomendasi Tindakan</div>
-                {rekom_rows}
-            </div>
-            """, unsafe_allow_html=True)
+                st.markdown(
+                    "<div style='background:rgba(26,107,60,0.04); border-left:3px solid #5ac98a; border-radius:8px; padding:10px 12px; margin-bottom:7px'>"
+                    + f"<strong style='font-size:0.85rem; color:#0f1c14'>{icon} {judul}</strong>"
+                    + f"<p style='font-size:0.78rem; color:#4a6355; margin:3px 0 0; line-height:1.5'>{detail}</p>"
+                    + "</div>",
+                    unsafe_allow_html=True
+                )
+            st.markdown("</div>", unsafe_allow_html=True)
 
         else:
             st.markdown("""
